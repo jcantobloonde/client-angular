@@ -1,6 +1,14 @@
 <div class="col-md-12">
   <h2>{{page_title}}</h2>
 
+  <div class="alert alert-success" *ngIf="status_car =='success'">
+    El coche se ha guardado correctamente.
+  </div>
+
+  <div class="alert alert-danger" *ngIf="status_car =='error'">
+    El coche no se ha guardado correctamente, intentelo de nuevo.
+  </div>
+
   <form #carNew="ngForm" (ngSubmit)="onSubmit(carNew)" class="col-md-5">
     <p>
     <label for="title">Titulo</label>

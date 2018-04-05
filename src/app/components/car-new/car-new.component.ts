@@ -15,34 +15,42 @@ export class CarNewComponent implements OnInit {
   public identity;
   public token;
   public car: Car;
+  public status_car: string;
 
-  constructor(
-    private _route: ActivatedRoute,
-    private _router: Router,
-    private _userService: UserService,
-    private _carService: CarService
-  ) {
+  constructor(private _route: ActivatedRoute,
+              private _router: Router,
+              private _userService: UserService,
+              private _carService: CarService) {
     this.page_title = 'Crear nuevo coche';
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
   }
 
   ngOnInit() {
-    if(this.identity == null){
-      this._router.navigate(["/login"]);
-    } else{
-      this.car = new Car(1,'','',1,'', null, null);
+    if (this.identity == null) {
+      this._router.navigate(['/login']);
+    } else {
+      this.car = new Car(1, '', '', 1, '', null, null);
     }
   }
 
-  onSubmit(form){
+  onSubmit(form) {
     this._carService.create(this.token, this.car).subscribe(
       response => {
-        this.car = response.car;
-      },error =>{
-          console.log(<any>error);
+        console.log(response);
+        if (response.status == 'success') {
+          this.car = response.car;
+          this.status_car = 'success';
+          this._router.navigate(['/home']);
+        } else {
+          this.status_car = 'error';
+        }
+      },
+      error => {
+        console.log(<any>error);
+        this.status_car = 'error';
       }
     );
   }
-
 }
+

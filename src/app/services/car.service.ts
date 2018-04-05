@@ -16,12 +16,22 @@ export class CarService {
     return "Hola Mundo";
   }
 
-  create(token, car:Car): Observable<any>{
+  create(token, car:Car): Observable<any> {
     let json = JSON.stringify(car);
     let params = "json="+json;
 
-    let headers = new HttpHeaders().set('Content-Type','application/x-ww-form-urlencoded').set('Authorization',token);
+    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded').set('Authorization',token);
 
-    return this._http.post(this.url+'car', params, {headers: headers});
+    return this._http.post(this.url + 'cars', params, {headers: headers});
+  }
+
+  getCars(): Observable<any> {
+    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+
+    return this._http.get(this.url + 'cars', {headers: headers});
+  }
+
+  getCar(id): Observable<any> {
+    return this._http.get(this.url + 'cars/' + id);
   }
 }
