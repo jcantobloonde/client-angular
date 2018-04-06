@@ -19,8 +19,8 @@
       <td *ngIf="car.status == 'true'">Si</td>
       <td *ngIf="car.status == 'false'">No</td>
       <td>
-        <a [routerLink]="['editar-coche', car.id]" class="btn btn-warning">Editar</a>
-        <a  class="btn btn-danger">Borrar</a>
+        <a [routerLink]="['/editar-coche', car.id]" class="btn btn-warning">Editar</a>
+        <a (click)="deleteCar(car.id)" class="btn btn-danger">Borrar</a>
       </td>
     </tr>
   </table>

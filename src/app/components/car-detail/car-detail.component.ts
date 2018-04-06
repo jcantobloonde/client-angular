@@ -31,7 +31,7 @@ export class CarDetailComponent implements OnInit {
 
       this._carService.getCar(id).subscribe(
         response => {
-          if (response.status == 'status') {
+          if (response.status == 'success') {
             this.car = response.car;
           } else {
             this._router.navigate(['home']);
